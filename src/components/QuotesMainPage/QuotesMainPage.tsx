@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import backend from '../../api/backend';
 import Quote from '../../model/Quote';
+import QuotesForm from '../QuotesForm/QuotesForm';
 
 interface Props {
   title: string,
@@ -9,7 +10,7 @@ interface Props {
 }
 
 interface State {
-  randomQuote: Quote[],
+  randomQuotes: Quote[],
 }
 
 class QuotesMainPage extends React.Component<Props, State> {
@@ -17,17 +18,17 @@ class QuotesMainPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      randomQuote: [new Quote()]
+      randomQuotes: [new Quote()]
     }
   }
 
   loadRandomQuote = () => {
-    backend.get('/1').then(
+    backend.get<Quote[]>('/1').then(
       response => {
-        this.setState({ randomQuote: response.data });
+        this.setState({ randomQuotes: response.data });
       },
       error => {
-        console.log(error);
+        console.log(error.message);
       });
   }
 
@@ -47,7 +48,8 @@ class QuotesMainPage extends React.Component<Props, State> {
         <h1>{this.props.title}</h1>
         <h4>{this.props.subtitle}</h4>
         <Button onClick={() => this.loadRandomQuote()} variant='primary'>Random Quote</Button>
-        <h4 >{JSON.stringify(this.state.randomQuote)}</h4>
+        <h4 >{JSON.stringify(this.state.randomQuotes)}</h4>
+        <QuotesForm />
       </div>
     );
   }
