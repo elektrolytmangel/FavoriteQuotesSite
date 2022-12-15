@@ -5,7 +5,7 @@ class Quote {
   content: string | undefined;
   author: string | undefined;
   additionalInformation: string | undefined;
-  type: QuoteType | undefined;
+  type: QuoteType = QuoteType.FAVORITE;
 }
 
 export default Quote;

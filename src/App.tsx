@@ -1,12 +1,11 @@
 import './App.css';
-import QuotesMainPage from './components/QuotesMainPage/QuotesMainPage';
+import NavSideBar from './components/NavSideBar/NavSideBar';
 
 function App() {
   return (
     <div className="App">
-      <QuotesMainPage
-        title='My Favourite Quotes'
-        subtitle='This website is the entry point to my favourite quotes.' />
+      <NavSideBar />
+     
     </div>
   );
 }

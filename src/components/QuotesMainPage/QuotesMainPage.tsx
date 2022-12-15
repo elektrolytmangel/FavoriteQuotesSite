@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import backend from '../../api/backend';
 import Quote from '../../model/Quote';
+import QuoteCard from '../QuoteCard/QuoteCard';
 import QuotesForm from '../QuotesForm/QuotesForm';
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 
 interface State {
   randomQuotes: Quote[],
+  randomCount: number,
 }
 
 class QuotesMainPage extends React.Component<Props, State> {
@@ -18,12 +20,13 @@ class QuotesMainPage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      randomQuotes: [new Quote()]
+      randomQuotes: [],
+      randomCount: 1,
     }
   }
 
   loadRandomQuote = () => {
-    backend.get<Quote[]>('/1').then(
+    backend.get<Quote[]>(`/${this.state.randomCount}`).then(
       response => {
         this.setState({ randomQuotes: response.data });
       },
@@ -44,13 +47,20 @@ class QuotesMainPage extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <>
         <h1>{this.props.title}</h1>
         <h4>{this.props.subtitle}</h4>
-        <Button onClick={() => this.loadRandomQuote()} variant='primary'>Random Quote</Button>
-        <h4 >{JSON.stringify(this.state.randomQuotes)}</h4>
-        <QuotesForm />
-      </div>
+        <div className='mt-5'>
+          {this.state.randomQuotes.map(x => <div key={x?.id} ><QuoteCard quote={x} /></div>)}
+        </div>
+        <div className='d-flex'>
+          <Button className='me-1' style={{ minWidth: '300px' }} onClick={() => this.loadRandomQuote()} variant='dark'>Random Quote</Button>
+          <Form.Control type="number" onChange={(v) => this.setState(s => { return { randomCount: parseInt(v.target.value) } })} value={this.state.randomCount} />
+        </div>
+        <div className='mt-5'>
+          <QuotesForm />
+        </div>
+      </>
     );
   }
 }
