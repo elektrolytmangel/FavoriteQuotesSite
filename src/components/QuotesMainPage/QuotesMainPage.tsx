@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import backend from '../../api/backend';
 import Quote from '../../model/Quote';
+import Loading from '../Loading/Loading';
 import QuoteCard from '../QuoteCard/QuoteCard';
 import QuotesForm from '../QuotesForm/QuotesForm';
 
@@ -51,7 +52,7 @@ class QuotesMainPage extends React.Component<Props, State> {
         <h1>{this.props.title}</h1>
         <h4>{this.props.subtitle}</h4>
         <div className='mt-5'>
-          {this.state.randomQuotes.map(x => <div key={x?.id} ><QuoteCard quote={x} /></div>)}
+          {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map(x => <div key={x?.id} ><QuoteCard quote={x} /></div>) : <Loading />}
         </div>
         <div className='d-flex'>
           <Button className='me-1' style={{ minWidth: '300px' }} onClick={() => this.loadRandomQuote()} variant='dark'>Random Quote</Button>
