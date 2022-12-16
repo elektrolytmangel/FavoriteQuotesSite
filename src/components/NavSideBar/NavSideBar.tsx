@@ -13,7 +13,7 @@ const NavSideBar = () => {
 
   useEffect(() => {
     setContent(quotesMainPage);
-  }, []);
+  }, [quotesMainPage]);
 
   return (
     <div className="container-fluid">
