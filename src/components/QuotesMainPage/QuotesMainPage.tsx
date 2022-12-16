@@ -52,7 +52,7 @@ class QuotesMainPage extends React.Component<Props, State> {
         <h1>{this.props.title}</h1>
         <h4>{this.props.subtitle}</h4>
         <div className='mt-5'>
-          {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map(x => <div key={x?.id} ><QuoteCard quote={x} /></div>) : <Loading />}
+          {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map(x => <div key={x?.id} className="animate__animated animate__flipInX" ><QuoteCard quote={x} /></div>) : <Loading />}
         </div>
         <div className='d-flex'>
           <Button className='me-1' style={{ minWidth: '300px' }} onClick={() => this.loadRandomQuote()} variant='dark'>Random Quote</Button>
