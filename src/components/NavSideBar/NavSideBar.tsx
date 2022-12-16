@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import QuotesMainPage from "../QuotesMainPage/QuotesMainPage";
 import QuotesOverview from "../QuotesOverview/QuotesOverview";
 
 const NavSideBar = () => {
-  const [content, setContent] = useState<any>();
-
   const quotesMainPage = <QuotesMainPage
     title='My Favourite Quotes'
     subtitle='This website is the entry point to my favourite quotes.' />;
   const quotesOverview = <QuotesOverview />;
-
-  useEffect(() => {
-    setContent(quotesMainPage);
-  }, [quotesMainPage]);
+  const [content, setContent] = useState<any>(quotesMainPage);
 
   return (
     <div className="container-fluid">
