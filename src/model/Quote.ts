@@ -1,10 +1,10 @@
 import QuoteType from "./QuoteType";
 
 class Quote {
-  id: string | undefined;
-  content: string | undefined;
-  author: string | undefined;
-  additionalInformation: string | undefined;
+  id: string = '';
+  content: string = '';
+  author: string = '';
+  additionalInformation: string = '';
   type: QuoteType = QuoteType.FAVORITE;
 }
 
