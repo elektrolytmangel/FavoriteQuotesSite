@@ -32,7 +32,7 @@ const QuotesForm = () => {
   return (
     <>
       <h1>Add new quote</h1>
-      <Form onSubmit={(e) => onHandleSubmit(e, state)}>
+      <Form onSubmit={(e) => onHandleSubmit(e, state)} className="well">
         <Form.Group className={state.content === '' ? 'control-group error' : ''}>
           <Form.Label>Content</Form.Label>
           <Form.Control type="text" placeholder="someText" onChange={(e) => { setState(s => { return { ...s, content: e.target.value } as Quote }) }} value={state.content} />

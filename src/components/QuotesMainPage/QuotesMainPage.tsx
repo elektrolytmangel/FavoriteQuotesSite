@@ -39,7 +39,7 @@ class QuotesMainPage extends React.Component<Props, State> {
 
   componentDidMount(): void {
     this.loadRandomQuote();
-    this.interval = setInterval(() => this.loadRandomQuote(), 10000);
+    this.interval = setInterval(() => this.loadRandomQuote(), 15000);
   }
 
   componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
@@ -58,7 +58,7 @@ class QuotesMainPage extends React.Component<Props, State> {
           {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map((x, i) => <div key={i} className="animate__animated animate__flipInX" ><QuoteCard quote={x} /></div>) : <Loading />}
         </div>
         <div style={{ display: 'flex' }}>
-          <Button style={{ minWidth: '300px', marginRight: '5px' }} onClick={() => this.loadRandomQuote()} variant='dark'>Random Quote</Button>
+          <Button style={{ minWidth: '100px', marginRight: '5px' }} onClick={() => this.loadRandomQuote()} variant='dark'>Random Quote</Button>
           <Form.Control type="number" onChange={(v) => this.setState(s => { return { randomCount: parseInt(v.target.value) } })} value={this.state.randomCount} />
         </div>
         <div className='mt-5'>
