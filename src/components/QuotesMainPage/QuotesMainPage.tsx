@@ -17,7 +17,7 @@ interface State {
 }
 
 class QuotesMainPage extends React.Component<Props, State> {
-  interval: any | null;
+  interval: any | undefined;
 
   constructor(props: Props) {
     super(props);
@@ -27,10 +27,19 @@ class QuotesMainPage extends React.Component<Props, State> {
     }
   }
 
+  resetInterval = () => {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+
+    this.interval = setInterval(() => this.loadRandomQuote(), 15000);
+  }
+
   loadRandomQuote = () => {
     backend.get<Quote[]>(`/${this.state.randomCount}`).then(
       response => {
         this.setState({ randomQuotes: response.data });
+        this.resetInterval();
       },
       error => {
         console.log(error.message);
@@ -39,7 +48,6 @@ class QuotesMainPage extends React.Component<Props, State> {
 
   componentDidMount(): void {
     this.loadRandomQuote();
-    this.interval = setInterval(() => this.loadRandomQuote(), 15000);
   }
 
   componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
@@ -55,10 +63,10 @@ class QuotesMainPage extends React.Component<Props, State> {
         <h1>{this.props.title}</h1>
         <h4>{this.props.subtitle}</h4>
         <div className='mt-5'>
-          {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map((x, i) => <div key={i} className="animate__animated animate__flipInX" ><QuoteCard quote={x} /></div>) : <Loading />}
+          {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map((x, i) => <div key={`${i}${x.id}`} className="animate__animated animate__flipInX" ><QuoteCard quote={x} /></div>) : <Loading />}
         </div>
         <div style={{ display: 'flex' }}>
-          <Button style={{ minWidth: '100px', marginRight: '5px' }} onClick={() => this.loadRandomQuote()} variant='dark'>Random Quote</Button>
+          <Button style={{ minWidth: '100px', marginRight: '5px' }} onClick={() => this.loadRandomQuote()} variant='primary'>Random Quote</Button>
           <Form.Control type="number" onChange={(v) => this.setState(s => { return { randomCount: parseInt(v.target.value) } })} value={this.state.randomCount} />
         </div>
         <div className='mt-5'>

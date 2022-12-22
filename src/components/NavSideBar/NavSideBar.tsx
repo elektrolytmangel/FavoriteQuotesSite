@@ -13,7 +13,7 @@ const NavSideBar = () => {
   return (
     <div style={{ margin: '10px' }}>
       <div className="">
-        <Button onClick={() => setContent(quotesMainPage)} className="m-2">Randomizer</Button>
+        <Button onClick={() => setContent(quotesMainPage)} className="m-2" variant="danger" >Randomizer</Button>
         <Button onClick={() => setContent(quotesOverview)} className="m-2" variant="success">Quotes</Button>
         <Button className="m-2" variant="info">Others</Button>
       </div>
