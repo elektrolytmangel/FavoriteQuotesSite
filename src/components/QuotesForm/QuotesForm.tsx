@@ -43,7 +43,7 @@ const QuotesForm = () => {
         <Form.Select onChange={(e) => { setState(s => { return { ...s, type: e.target.value as QuoteType } as Quote }) }} value={state.type}>
           {getOptions().map(x => <option key={x}>{x}</option>)}
         </Form.Select>
-        <Button className='mt-2' variant='success' type='submit'>Submit</Button>
+        <Button style={{ margin: '5px' }} variant='success' type='submit'>Submit</Button>
       </Form>
       <p>{JSON.stringify(state)}</p>
     </>

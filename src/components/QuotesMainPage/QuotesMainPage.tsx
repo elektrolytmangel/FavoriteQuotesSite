@@ -48,20 +48,20 @@ class QuotesMainPage extends React.Component<Props, State> {
 
   render() {
     return (
-      <>
+      <div style={{ justifyContent: 'center', display: '' }}>
         <h1>{this.props.title}</h1>
         <h4>{this.props.subtitle}</h4>
         <div className='mt-5'>
           {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map(x => <div key={x?.id} className="animate__animated animate__flipInX" ><QuoteCard quote={x} /></div>) : <Loading />}
         </div>
-        <div className='d-flex'>
+        <div style={{ display: 'flex' }}>
           <Button className='me-1' style={{ minWidth: '300px' }} onClick={() => this.loadRandomQuote()} variant='dark'>Random Quote</Button>
           <Form.Control type="number" onChange={(v) => this.setState(s => { return { randomCount: parseInt(v.target.value) } })} value={this.state.randomCount} />
         </div>
         <div className='mt-5'>
           <QuotesForm />
         </div>
-      </>
+      </div>
     );
   }
 }
