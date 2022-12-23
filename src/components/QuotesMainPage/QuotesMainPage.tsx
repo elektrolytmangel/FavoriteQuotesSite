@@ -43,6 +43,7 @@ class QuotesMainPage extends React.Component<Props, State> {
       },
       error => {
         console.log(error.message);
+        setTimeout(() => this.loadRandomQuote(), 5000);
       });
   }
 
@@ -62,7 +63,7 @@ class QuotesMainPage extends React.Component<Props, State> {
       <div style={{ justifyContent: 'center', display: '' }}>
         <h1>{this.props.title}</h1>
         <h4>{this.props.subtitle}</h4>
-        <div className='mt-5'>
+        <div className='mt-3'>
           {this.state.randomQuotes.length > 0 ? this.state.randomQuotes.map((x, i) => <div key={`${i}${x.id}`} className="animate__animated animate__flipInX" ><QuoteCard quote={x} /></div>) : <Loading />}
         </div>
         <div style={{ display: 'flex' }}>

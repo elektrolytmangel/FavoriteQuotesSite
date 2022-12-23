@@ -1,10 +1,9 @@
+import 'animate.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-//import './custom.scss';
 import './assets/bootstrap90s.css';
-import 'animate.css';
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
